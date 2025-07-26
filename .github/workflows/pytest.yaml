@@ -8,6 +8,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      DB_USER: postgres
+      DB_PASSWORD: postgres
 
     steps:
       - name: Checkout code
@@ -27,6 +30,8 @@ jobs:
         run: pytest --verbose
     
     steps:
-      - name: Run Step2
-        run: echo "This is Step 2 of the job"
+      - name: Print DB Info
+        run: |
+          echo "Database User: $DB_USER"
+          echo "DB User: $DB_USER"
         

@@ -35,7 +35,7 @@ jobs:
           echo "db_connection_checked=true" >> test_results.txt
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: test_results.txt
@@ -49,7 +49,7 @@ jobs:
 
     steps:
       - name: Download test results
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: test-results
 

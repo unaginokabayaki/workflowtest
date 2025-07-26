@@ -28,10 +28,34 @@ jobs:
 
       - name: Run Pytest
         run: pytest --verbose
-    
+
+      - name: Save test results
+        run: |
+          echo "test_status=passed" >> test_results.txt
+          echo "db_connection_checked=true" >> test_results.txt
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: test_results.txt
+  
+  debug:
+    runs-on: ubuntu-latest
+    needs: test  # testジョブの完了を待つ
+    env:
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+
     steps:
-      - name: Print DB Info
+      - name: Download test results
+        uses: actions/download-artifact@v3
+        with:
+          name: test-results
+
+      - name: Print DB Info and Test Results
         run: |
           echo "Database User: $DB_USER"
           echo "DB User: $DB_USER"
-        
+          echo "--- Test Results ---"
+          cat test_results.txt

@@ -46,6 +46,7 @@ jobs:
     env:
       DB_USER: postgres
       DB_PASSWORD: postgres
+      BASE_URL: ${{ secrets.BASE_URL }}
 
     steps:
       - name: Download test results
@@ -57,5 +58,6 @@ jobs:
         run: |
           echo "Database User: $DB_USER"
           echo "DB User: $DB_USER"
+          echo "Base URL: $BASE_URL"
           echo "--- Test Results ---"
           cat test_results.txt
